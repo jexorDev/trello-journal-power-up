@@ -38,7 +38,11 @@ TrelloPowerUp.initialize({
       text: 'View Journal',
       callback: function(t) {
         return t.cards("all").then(function (cards) {
-          console.log(JSON.stringify(cards, null, 2));
+          t.modal({
+            args: { cards: JSON.stringify(cards, null, 2)},
+            title: "Journal",
+            fullscreen: true,
+          }) 
         });
       },
       condition: 'edit'
