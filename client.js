@@ -37,8 +37,8 @@ TrelloPowerUp.initialize({
       },
       text: 'View Journal',
       callback: function(t) {
-        return t.popup({
-          title: "Journal",
+        return t.modal({
+          fullscreen: true,
           url: "journal.html"
         })
       },
