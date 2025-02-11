@@ -39,8 +39,9 @@ TrelloPowerUp.initialize({
       callback: function(t) {
         return t.cards("all").then(function (cards) {
           t.modal({
-            args: { cards: JSON.stringify(cards, null, 2)},
             title: "Journal",
+            url: "journal.html",
+            args: { cards: JSON.stringify(cards, null, 2)},
             fullscreen: true,
           }) 
         });
