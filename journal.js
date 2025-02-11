@@ -1,6 +1,5 @@
 var t = window.TrelloPowerUp.iframe();
 
-t.get('board', 'shared', 'myKey')
-.then(function (data) {
-  console.log(JSON.stringify(data, null, 2));
-});
+return t.board("all").then(function (board) {
+    console.log(JSON.stringify(board, null, 2));
+  });
