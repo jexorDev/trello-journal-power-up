@@ -37,10 +37,9 @@ TrelloPowerUp.initialize({
       },
       text: 'View Journal',
       callback: function(t) {
-        return t.modal({
-          fullscreen: true,
-          url: "journal.html"
-        })
+        return t.board("id", "name").then(function (board) {
+          console.log(JSON.stringify(board, null, 2));
+        });
       },
       condition: 'edit'
     }];
