@@ -37,8 +37,8 @@ TrelloPowerUp.initialize({
       },
       text: 'View Journal',
       callback: function(t) {
-        return t.list("all").then(function (list) {
-          console.log(JSON.stringify(list, null, 2));
+        return t.cards("all").then(function (cards) {
+          console.log(JSON.stringify(cards, null, 2));
         });
       },
       condition: 'edit'
