@@ -1,15 +1,6 @@
-var t = TrelloPowerUp.iframe();
+var t = window.TrelloPowerUp.iframe();
 
-window.estimate.addEventListener("submit", function (event) {
-  // Stop the browser trying to submit the form itself.
-  event.preventDefault();
-  return t
-    .set("card", "shared", "estimate", window.estimateSize.value)
-    .then(function () {
-      t.closePopup();
-    });
-});
-
-t.render(function () {
-  t.sizeTo("#journal").done();
+return t.get('board', 'shared', 'myKey')
+.then(function (data) {
+  console.log(JSON.stringify(data, null, 2));
 });
