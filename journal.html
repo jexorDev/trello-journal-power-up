@@ -28,7 +28,7 @@
               document.write("<br>" + cards[i]["labels"][j]["name"]);
               const goalName = cards[i]["labels"][j]["name"];
               const cardName = cards[i]["name"];
-              goalMap(goalName).set(cardName);
+              goalMap.set(goalName, cardName);
 
             }
             
