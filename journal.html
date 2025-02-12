@@ -37,7 +37,7 @@
         }
 
         goalMap.forEach(function(value, key, map) {
-          for (var i = 0; i < map[key].length; i++) {
+          for (var i = 0; i < map.get(key).length; i++) {
             document.write("<br><span class='goal-name'>" + key + "</span>" + " " + value[i]);
 
           }
