@@ -16,26 +16,32 @@
         <h1>Journal</h1>
     </h1>
     <script>
+      
         var t = window.TrelloPowerUp.iframe();
 
         let cards = t.arg("cards");
+        let goalMap = new Map();        
         
         for (var i = 0; i < cards.length; i++){
           if (cards[i]["labels"] !== undefined) {
             for (var j = 0; j < cards[i]["labels"].length; j++) {
               document.write("<br>" + cards[i]["labels"][j]["name"]);
+              const goalName = cards[i]["labels"][j]["name"];
+              const cardName = cards[i]["name"];
+              goalMap(goalName).set(cardName);
 
             }
             
-          }
-          document.write("<br><br>array index: " + i);
-          var obj = cards[i];
-          for (var key in obj){
-            var value = obj[key];
-            document.write("<br> - " + key + ": " + value);
-          }
+          }          
         }
+
+        goalMap.forEach(function(value, key, map) {
+          document.write("<br>" + key + " " + value);
+        })
 
     </script>
   </body>
+  <style>
+    
+  </style>
 </html>
