@@ -28,7 +28,13 @@
               //if (new Date(cards[i]["dateLastActivity"]).lo)
               const goalName = cards[i]["labels"][j]["name"];
               const cardName = cards[i]["name"];
-              goalMap.set(goalName, [...goalMap.get(goalName), {cardName: cardName}]);
+              if (goalMap.has(goalName)) {
+                goalMap.set(goalName, [...goalMap.get(goalName), {cardName: cardName}]);
+
+              } else {
+                goalMap.set(goalName, [{cardName: cardName}]);
+
+              }
               
 
             }
