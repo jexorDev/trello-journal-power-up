@@ -21,8 +21,8 @@
         let cards = t.arg("cards");
         
         for (var i = 0; i < cards.length; i++){
-          if (cards[i][labels] !== undefined) {
-            cards[i][labels]["name"]
+          if (cards[i]["labels"] !== undefined) {
+            cards[i]["labels"]["name"]
           }
           document.write("<br><br>array index: " + i);
           var obj = cards[i];
