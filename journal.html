@@ -25,9 +25,11 @@
         for (var i = 0; i < cards.length; i++){
           if (cards[i]["labels"] !== undefined) {
             for (var j = 0; j < cards[i]["labels"].length; j++) {
+              //if (new Date(cards[i]["dateLastActivity"]).lo)
               const goalName = cards[i]["labels"][j]["name"];
               const cardName = cards[i]["name"];
-              goalMap.set(goalName, cardName);
+              goalMap.set(goalName, [...cardName]);
+              
 
             }
             
@@ -35,7 +37,10 @@
         }
 
         goalMap.forEach(function(value, key, map) {
-          document.write("<br><span class='goal-name'>" + key + "</span>" + " " + value);
+          for (var i = 0; i < map[key].length; i++) {
+            document.write("<br><span class='goal-name'>" + key + "</span>" + " " + value[i]);
+
+          }
         })
 
     </script>
