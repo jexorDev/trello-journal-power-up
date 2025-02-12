@@ -22,7 +22,11 @@
         
         for (var i = 0; i < cards.length; i++){
           if (cards[i]["labels"] !== undefined) {
-            cards[i]["labels"]["name"]
+            for (var j = 0; j < cards[i]["labels"].length; j++) {
+              document.write("<br>" + cards[i]["labels"][j]["name"]);
+
+            }
+            
           }
           document.write("<br><br>array index: " + i);
           var obj = cards[i];
