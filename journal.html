@@ -27,12 +27,17 @@
             for (var j = 0; j < cards[i]["labels"].length; j++) {
               //if (new Date(cards[i]["dateLastActivity"]).lo)
               const goalName = cards[i]["labels"][j]["name"];
-              const cardName = cards[i]["name"];
+
+              const goalActivity = {
+                activityName: cards[i]["name"],
+                lastActivityDate: cards[i]["dateLastActivity"]
+              }
+
               if (goalMap.has(goalName)) {
-                goalMap.set(goalName, [...goalMap.get(goalName), {cardName: cardName}]);
+                goalMap.set(goalName, [...goalMap.get(goalName), goalActivity]);
 
               } else {
-                goalMap.set(goalName, [{cardName: cardName}]);
+                goalMap.set(goalName, [goalActivity]);
 
               }
               
@@ -43,8 +48,12 @@
         }
 
         goalMap.forEach(function(value, key, map) {
+          
+          document.write("<br><span class='goal-name'>" + key + "</span>");
+
           for (var i = 0; i < map.get(key).length; i++) {
-            document.write("<br><span class='goal-name'>" + key + "</span>" + " " + value[i]["cardName"]);
+            document.write("<br>" + value[i]["activityName"] + " " + value[i]["dateLastActivity"]);
+            console.log(new Date(value[i]["dateLastActivity"]));
 
           }
         })
