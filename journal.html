@@ -53,9 +53,9 @@
               let activityEntries = "";
 
               if (apiToken === "") {
-                await t.getRestApi().getToken().then((apiToken) => {
+                await t.getRestApi().getToken().then((token) => {
                   console.log("---api token set----");
-                  apiToken = apiToken;
+                  apiToken = token;
                 });
 
               }
