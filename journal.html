@@ -19,6 +19,16 @@
         <h1>Journal</h1>
     </h1>
     <script>
+       async function getCardComments(apiKey, token, cardId) {
+          try {
+            const response = await fetch(`https://api.trello.com/1/cards/${cardId}/actions?filter=commentCard&key=${apiKey}&token=${token}`);
+            const data = await response.json();
+            return data;
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        }
+
         dayjs.extend(window.dayjs_plugin_utc);
         dayjs.extend(window.dayjs_plugin_dayOfYear);
         
@@ -38,7 +48,8 @@
 
               const appKey = "ab51919adb28cfb83270a0d6ee991d38";
               //t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
-              t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
+              //t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
+              t.getRestApi().getToken().then((apiToken) => getCardComments(appKey, apiToken, "67a2f8137cc76f978ba2b83b").then((data) => console.log(data)));
               
               const goalName = cards[i]["labels"][j]["name"];
 
