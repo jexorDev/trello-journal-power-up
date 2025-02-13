@@ -40,7 +40,6 @@
 
         const cards = t.arg("cards");
         let goalMap = new Map();        
-        console.log(cards);
         for (var i = 0; i < cards.length; i++){
           if (cards[i]["labels"] !== undefined) {
             for (var j = 0; j < cards[i]["labels"].length; j++) {
@@ -49,9 +48,11 @@
               }
 
               const appKey = "ab51919adb28cfb83270a0d6ee991d38";
-              console.log(cards[i]["id"]);
-              t.getRestApi().authorize({ scope: "read,write" }).then(() => console.log("authorized")).catch((ex) => console.log(ex));
-              t.getRestApi().getToken().then((apiToken) => getCardComments(appKey, apiToken, "67a2f8137cc76f978ba2b83b").then((data) => console.log(data)));
+              t.getRestApi().authorize({ scope: "read,write" }).then(() => {
+                console.log("authorized"); 
+                t.getRestApi().getToken().then((apiToken) => getCardComments(appKey, apiToken, "67a2f8137cc76f978ba2b83b").then((data) => console.log(data)));
+              }).catch((ex) => console.log(ex));
+              
               
               const goalName = cards[i]["labels"][j]["name"];
 
