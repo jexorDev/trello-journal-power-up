@@ -40,7 +40,7 @@ TrelloPowerUp.initialize({
         return t.cards("all").then(function (cards) {
           t.modal({
             title: "Journal",
-            appKey: process.env.APP_KEY,
+            appKey: "ab51919adb28cfb83270a0d6ee991d38",
             appName: "activity-journal",
             appAuthor: "doostin",
             url: "journal.html",
