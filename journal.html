@@ -36,8 +36,7 @@
   appKey: "ab51919adb28cfb83270a0d6ee991d38",
   appName: "activity-journal",
   appAuthor: "doostin"});
-
-        const apiToken = t.getRestApi().getToken();
+       
 
         let cards = t.arg("cards");
         let goalMap = new Map();        
@@ -49,8 +48,8 @@
                 continue;
               }
 
-              getCardComments("ab51919adb28cfb83270a0d6ee991d38", apiToken, cards[i]["id"]).then((data) => console.log(data));
-
+              t.getRestApi().getToken().then((apiToken) => getCardComments("ab51919adb28cfb83270a0d6ee991d38", apiToken, cards[i]["id"]).then((data) => console.log(data)));
+              
               const goalName = cards[i]["labels"][j]["name"];
 
               const goalActivity = {
