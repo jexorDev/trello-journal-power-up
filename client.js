@@ -26,29 +26,47 @@ var Promise = TrelloPowerUp.Promise;
 var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
 var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg';
 
+function showAuthorizationPopup(t) {
+  return t.popup({
+    title: "Authorize to continue",
+    url: "./authorize.html",
+  });
+}
+
+function showJournal(t) {
+  return t.cards("all").then(function (cards) {
+    t.modal({
+      title: "Journal",          
+      url: "journal.html",
+      args: { cards: cards },
+      fullscreen: true,
+    }) 
+  });
+}
 
 TrelloPowerUp.initialize({
   'board-buttons': function (t, opts) {
-    return [{
-      // we can either provide a button that has a callback function
-      icon: {
-        dark: WHITE_ICON,
-        light: BLACK_ICON
-      },
-      text: 'View Journal',      
-      callback: function(t) {
-        return t.cards("all").then(function (cards) {
-          t.modal({
-            title: "Journal",          
-            url: "journal.html",
-            args: { cards: cards },
-            fullscreen: true,
-          }) 
+    return t
+        .getRestApi()
+        .isAuthorized()
+        .then(function (isAuthorized) {
+          if (isAuthorized) {
+            return [
+              {
+                text: "Journal Powerup",
+                callback: showMenu,
+              },
+            ];
+          } else {
+            return [
+              {
+                text: "Journal",
+                callback: showIframe,
+              },
+            ];
+          }
         });
-      },
-      condition: 'edit'
-    }];
-  }
+    },
 }, {
   appKey: "ab51919adb28cfb83270a0d6ee991d38",
   appName: "activity-journal",
