@@ -38,8 +38,8 @@
               }
 
               const appKey = "ab51919adb28cfb83270a0d6ee991d38";
-              t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
-              
+              //t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
+              t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
               
               const goalName = cards[i]["labels"][j]["name"];
 
