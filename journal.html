@@ -26,19 +26,6 @@
   appKey: "ab51919adb28cfb83270a0d6ee991d38",
   appName: "activity-journal",
   appAuthor: "doostin"});
-       
-  t.render(function () {
-        t.getRestApi()
-          .isAuthorized()
-          .then(function (isAuthorized) {
-            if (isAuthorized) {
-              alert("Success!");
-
-            } else {
-              t.popup()
-            }
-          });
-      });
 
         const cards = t.arg("cards");
         let goalMap = new Map();        

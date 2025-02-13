@@ -54,14 +54,14 @@ TrelloPowerUp.initialize({
             return [
               {
                 text: "Journal Powerup",
-                callback: showMenu,
+                callback: showJournal,
               },
             ];
           } else {
             return [
               {
                 text: "Journal",
-                callback: showIframe,
+                callback: showAuthorizationPopup,
               },
             ];
           }
