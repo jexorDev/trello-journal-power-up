@@ -49,7 +49,7 @@
               const appKey = "ab51919adb28cfb83270a0d6ee991d38";
               //t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
               //t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
-              t.getRestApi().getToken().then((apiToken) => getCardComments(appKey, apiToken, "67a2f8137cc76f978ba2b83b").then((data) => console.log(data)));
+              t.getRestApi().getToken().then((apiToken) => getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => console.log(data)));
               
               const goalName = cards[i]["labels"][j]["name"];
 
