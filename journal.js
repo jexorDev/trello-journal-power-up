@@ -1,3 +1,3 @@
-var t = window.TrelloPowerUp.iframe();
+//var t = window.TrelloPowerUp.iframe();
 
-console.log(t.arg("cards"));
+//console.log(t.arg("cards"));
