@@ -52,7 +52,7 @@
               await t.getRestApi().getToken().then((apiToken) => {
                 console.log("---got token-----")
                 console.log(i);
-                getCardComments(appKey, apiToken, "67a2f8137cc76f978ba2b83b").then((data) => console.log(data));
+                getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => console.log(data));
               });
               
               console.log("---regular loop-----")
