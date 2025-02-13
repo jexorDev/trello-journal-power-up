@@ -13,13 +13,17 @@
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/dayOfYear.js"></script>
     <script src="/journal.js"></script>
     <div id="journal">
         <h1>Journal</h1>
     </h1>
     <script>
-        dayjs.extend(window.dayjs_plugin_utc)
-        console.log(dayjs().utc().format());
+        dayjs.extend(window.dayjs_plugin_utc);
+        dayjs.extend(window.dayjs_plugin_dayOfYear);
+        
+        console.log(dayjs().utc().dayOfYear());
+        
         var t = window.TrelloPowerUp.iframe();
 
         let cards = t.arg("cards");
