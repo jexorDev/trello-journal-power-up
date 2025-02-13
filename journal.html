@@ -27,6 +27,18 @@
   appName: "activity-journal",
   appAuthor: "doostin"});
        
+  t.render(function () {
+        t.getRestApi()
+          .isAuthorized()
+          .then(function (isAuthorized) {
+            if (isAuthorized) {
+              alert("Success!");
+
+            } else {
+              alert("Failure");
+            }
+          });
+      });
 
         const cards = t.arg("cards");
         let goalMap = new Map();        
