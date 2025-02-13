@@ -49,8 +49,7 @@ TrelloPowerUp.initialize({
       condition: 'edit'
     }];
   }
-},
-{
+}, {
   appKey: "ab51919adb28cfb83270a0d6ee991d38",
   appName: "activity-journal",
   appAuthor: "doostin"});
