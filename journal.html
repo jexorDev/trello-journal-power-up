@@ -18,6 +18,7 @@
         <h1>Journal</h1>
     </h1>
     <script>
+        dayjs.extend(window.dayjs_plugin_utc)
         console.log(dayjs().utc().format());
         var t = window.TrelloPowerUp.iframe();
 
