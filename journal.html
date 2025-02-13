@@ -22,8 +22,6 @@
         dayjs.extend(window.dayjs_plugin_utc);
         dayjs.extend(window.dayjs_plugin_dayOfYear);
         
-        console.log(dayjs().utc().dayOfYear());
-        
         var t = window.TrelloPowerUp.iframe();
 
         let cards = t.arg("cards");
@@ -32,7 +30,10 @@
         for (var i = 0; i < cards.length; i++){
           if (cards[i]["labels"] !== undefined) {
             for (var j = 0; j < cards[i]["labels"].length; j++) {
-              //if (new Date(cards[i]["dateLastActivity"]).lo)
+              if (dayjs(cards[i]["dateLastActivity"]).dayOfYear() !== dayjs().utc().dayOfYear()) {
+                continue;
+              }
+
               const goalName = cards[i]["labels"][j]["name"];
 
               const goalActivity = {
