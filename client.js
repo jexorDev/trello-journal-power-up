@@ -28,10 +28,6 @@ var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4
 
 
 TrelloPowerUp.initialize({
-      appKey: "ab51919adb28cfb83270a0d6ee991d38",
-      appName: "activity-journal",
-      appAuthor: "doostin"}, 
-      {
   'board-buttons': function (t, opts) {
     return [{
       // we can either provide a button that has a callback function
@@ -53,4 +49,8 @@ TrelloPowerUp.initialize({
       condition: 'edit'
     }];
   }
-});
+},
+{
+  appKey: "ab51919adb28cfb83270a0d6ee991d38",
+  appName: "activity-journal",
+  appAuthor: "doostin"});
