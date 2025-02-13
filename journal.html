@@ -37,6 +37,7 @@
   appName: "activity-journal",
   appAuthor: "doostin"});
 
+          const apiToken = "";
         const cards = t.arg("cards");
         let goalMap = new Map();        
         for (var i = 0; i < cards.length; i++){
@@ -50,10 +51,23 @@
               //t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
               //t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
               let activityEntries = "";
-              await t.getRestApi().getToken().then((apiToken) => {
-                getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntries = data);
-              });
+
+              if (apiToken === "") {
+                await t.getRestApi().getToken().then((apiToken) => {
+                  console.log("---api token set----");
+                  apiToken = apiToken;
+                });
+
+              }
               
+              await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => {
+                    console.log("----inside promise-----")
+                    console.log(data); 
+                    activityEntries = data;});
+
+              console.log("----main code-----");
+              console.log(activityEntries);
+
               const goalName = cards[i]["labels"][j]["name"];
 
               const goalActivity = {
