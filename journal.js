@@ -1,0 +1,1 @@
+document.getElementById("journal").innerHTML = "<h1>my journal</h1>"
