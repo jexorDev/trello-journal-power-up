@@ -36,13 +36,13 @@ TrelloPowerUp.initialize({
         light: BLACK_ICON
       },
       text: 'View Journal',
+      appKey: "ab51919adb28cfb83270a0d6ee991d38",
+      appName: "activity-journal",
+      appAuthor: "doostin",
       callback: function(t) {
         return t.cards("all").then(function (cards) {
           t.modal({
-            title: "Journal",
-            appKey: "ab51919adb28cfb83270a0d6ee991d38",
-            appName: "activity-journal",
-            appAuthor: "doostin",
+            title: "Journal",          
             url: "journal.html",
             args: { cards: cards },
             fullscreen: true,
