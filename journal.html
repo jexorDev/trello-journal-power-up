@@ -30,7 +30,7 @@
         }
 
         function isSameDay(firstDate, secondDate) {
-          return dayjs(firstDate).dayOfYear() !== dayjs(secondDate).dayOfYear()
+          return dayjs(firstDate).dayOfYear() === dayjs(secondDate).dayOfYear()
         }
 
         dayjs.extend(window.dayjs_plugin_utc);
