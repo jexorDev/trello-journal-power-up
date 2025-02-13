@@ -9,16 +9,16 @@
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script>
       var t = window.TrelloPowerUp.iframe({
-        appKey: "your-app-key",
-        appName: "My Great Power-Up",
-        appAuthor: "My Company",
+        appKey: "ab51919adb28cfb83270a0d6ee991d38",
+  appName: "activity-journal",
+  appAuthor: "doostin"
       });
       t.render(function () {
         document.querySelector("button").addEventListener(
           "click",
           function () {
             t.getRestApi()
-              .authorize({ scope: "read,write" })
+              .authorize({ scope: "read" })
               .then(function (t) {
                 alert("Success!");
               });
