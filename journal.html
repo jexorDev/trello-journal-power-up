@@ -49,18 +49,16 @@
               const appKey = "ab51919adb28cfb83270a0d6ee991d38";
               //t.get(cards[i]["id"], "shared", appKey).then((data) => console.log(JSON.stringify(data, null, 2)));
               //t.card(cards[i]["id"]).then((data) => console.log(JSON.stringify(data, null, 2)));
+              let activityEntries = "";
               await t.getRestApi().getToken().then((apiToken) => {
-                console.log("---got token-----")
-                console.log(i);
-                getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => console.log(data));
+                getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntries = data);
               });
               
-              console.log("---regular loop-----")
-              console.log(i);
               const goalName = cards[i]["labels"][j]["name"];
 
               const goalActivity = {
                 activityName: cards[i]["name"],
+                entries: activityEntries,
                 dateLastActivity: cards[i]["dateLastActivity"]
               }
 
@@ -84,6 +82,7 @@
 
           for (var i = 0; i < map.get(key).length; i++) {
             document.write("<br>" + value[i]["activityName"] + " " + value[i]["dateLastActivity"]);
+            document.write("<br>" + value[i][entries]);
             //console.log(new Date(value[i]["dateLastActivity"]));
 
           }
