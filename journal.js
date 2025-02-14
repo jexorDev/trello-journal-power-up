@@ -93,11 +93,14 @@ async function getCardComments(apiKey, token, cardId) {
     console.log(value)
     html.push("<br><span class='goal-name'>" + key + "</span>");
 
-    html.push("<br>" + value["activityName"] + " " + value["dateLastActivity"]);
-    
-    for (var j = 0; j < value["entries"].length; j++) {
-      html.push("<br>" + value["entries"][j]);
-    }    
+    for (var i = 0; i < value.length; i++) {
+      html.push("<br>" + value[i]["activityName"] + " " + value[i]["dateLastActivity"]);
+      
+      for (var j = 0; j < value[i]["entries"].length; j++) {
+        html.push("<br>" + value[i]["entries"][j]);
+      }    
+
+    }
   })
   
   document.getElementById("journal").innerHTML = html.join(" ");
