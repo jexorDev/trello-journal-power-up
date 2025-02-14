@@ -18,12 +18,11 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function getCurrentDateTime() {
-    const currentDateTime = new Date(Date.now());
-    return new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate(), currentDateTime.getHours(), currentDateTime.getMinutes());
+    return new Date(Date.now());    
   }
 
   function getLocalDateFromUTC(utcDate) {
-    return new Date(Date.parse(utcDate)).toLocaleDateString();
+    return new Date(new Date(Date.parse(utcDate)).toLocaleDateString());
   }
 
   async function start() {
