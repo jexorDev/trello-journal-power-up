@@ -18,7 +18,7 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function getCurrentDateTime() {
-    const currentDateTime = new Date();
+    const currentDateTime = new Date(Date.now());
     return new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate(), currentDateTime.getHours(), currentDateTime.getMinutes());
   }
 
