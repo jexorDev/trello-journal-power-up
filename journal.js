@@ -13,11 +13,8 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   async function start() {
-    document.getElementById("journal").innerHTML = "hwat?";
-  var t = window.TrelloPowerUp.iframe({
-appKey: "ab51919adb28cfb83270a0d6ee991d38",
-appName: "activity-journal",
-appAuthor: "doostin"});
+ 
+ 
 
     let apiToken = "";
   const cards = t.arg("cards");
