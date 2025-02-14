@@ -89,7 +89,8 @@ async function getCardComments(apiKey, token, cardId) {
   
   const html = []
   goalMap.forEach(function(value, key, map) {
-  
+    console.log(key)
+    console.log(value)
     html.push("<br><span class='goal-name'>" + key + "</span>");
 
     html.push("<br>" + value["activityName"] + " " + value["dateLastActivity"]);
