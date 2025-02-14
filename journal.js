@@ -8,8 +8,22 @@ async function getCardComments(apiKey, token, cardId) {
     }
   }
 
-  function isSameDay(firstDate, secondDate) {
-    return dayjs(firstDate).dayOfYear() === dayjs(secondDate).dayOfYear()
+  function isSameDay(first, second) {
+    const firstDate = new Date(first)
+    const secondDate = new Date(second)
+
+    return firstDate.getFullYear() === secondDate.getFullYear() &&
+      firstDate.getMonth() === secondDate.getMonth() &&
+      firstDate.getDate() === secondDate.getDate();
+  }
+
+  function getCurrentDateTime() {
+    const currentDateTime = new Date();
+    return new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), currentDateTime.getDate(), currentDateTime.getHours(), currentDateTime.getMinutes());
+  }
+
+  function getLocalDateFromUTC(utcDate) {
+    return new Date(Date.parse(utcDate)).toLocaleDateString();
   }
 
   async function start() {
@@ -20,7 +34,7 @@ async function getCardComments(apiKey, token, cardId) {
   const cards = t.arg("cards");
   let goalMap = new Map();        
   for (var i = 0; i < cards.length; i++){
-    if (!isSameDay(cards[i]["dateLastActivity"], dayjs().utc())) {
+    if (!isSameDay(getLocalDateFromUTC(cards[i]["dateLastActivity"]), getCurrentDateTime())) {
       continue;
     }
 
@@ -41,7 +55,7 @@ async function getCardComments(apiKey, token, cardId) {
         const activityEntries = [];
 
         for (var commentIndex = 0; commentIndex < activityEntriesJson.length; commentIndex++) {
-          if (!isSameDay(activityEntriesJson[commentIndex]["date"], dayjs().utc())) {
+          if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), getCurrentDateTime())) {
             continue;
           }
 
@@ -91,6 +105,4 @@ async function getCardComments(apiKey, token, cardId) {
 
 }
 
-dayjs.extend(window.dayjs_plugin_utc);
-dayjs.extend(window.dayjs_plugin_dayOfYear);
 start();
