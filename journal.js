@@ -94,7 +94,7 @@ appAuthor: "doostin"});
 
     }
 
-    document.getElementById("journal").innerHTML = html.join(" ");
+    document.getElementById("journal").innerHTML = "hwhat?";
   })
 
 }
