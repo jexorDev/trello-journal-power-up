@@ -30,6 +30,15 @@ async function getCardComments(apiKey, token, cardId) {
  
 
     let apiToken = "";
+    const appKey = "ab51919adb28cfb83270a0d6ee991d38";
+
+    if (apiToken === "") {
+      await t.getRestApi().getToken().then((token) => {
+        apiToken = token;
+      });
+
+    }
+    
   const cards = t.arg("cards");
   let goalMap = new Map();        
   for (var i = 0; i < cards.length; i++){
@@ -42,14 +51,7 @@ async function getCardComments(apiKey, token, cardId) {
     if (cards[i]["labels"] !== undefined) {
       for (var j = 0; j < cards[i]["labels"].length; j++) {
 
-        const appKey = "ab51919adb28cfb83270a0d6ee991d38";
-
-        if (apiToken === "") {
-          await t.getRestApi().getToken().then((token) => {
-            apiToken = token;
-          });
-
-        }
+     
         
         let activityEntriesJson = "";
         await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
@@ -84,26 +86,20 @@ async function getCardComments(apiKey, token, cardId) {
       
     }          
   }
-  console.log(goalMap)
+  
+  const html = []
   goalMap.forEach(function(value, key, map) {
-    
-    const html = []
-
+  
     html.push("<br><span class='goal-name'>" + key + "</span>");
 
-    for (var i = 0; i < map.get(key).length; i++) {
-      html.push("<br>" + value[i]["activityName"] + " " + value[i]["dateLastActivity"]);
-
-      for (var j = 0; j < value[i]["entries"].length; j++) {
-        html.push("<br>" + value[i]["entries"][j]);
-      }
-      //console.log(new Date(value[i]["dateLastActivity"]));
-
-    }
-
-    document.getElementById("journal").innerHTML = html.join(" ");
+    html.push("<br>" + value["activityName"] + " " + value["dateLastActivity"]);
+    
+    for (var j = 0; j < value["entries"].length; j++) {
+      html.push("<br>" + value["entries"][j]);
+    }    
   })
-
+  
+  document.getElementById("journal").innerHTML = html.join(" ");
 }
 
 start();
