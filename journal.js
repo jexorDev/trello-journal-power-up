@@ -14,7 +14,7 @@ async function getCardComments(apiKey, token, cardId) {
 
   async function start() {
 
-
+    document.getElementById("journal").innerHTML = "hwat?";
 
   dayjs.extend(window.dayjs_plugin_utc);
   dayjs.extend(window.dayjs_plugin_dayOfYear);
@@ -94,7 +94,7 @@ appAuthor: "doostin"});
 
     }
 
-    document.getElementById("journal").innerHTML = "hwhat?";
+    document.getElementById("journal").innerHTML = html.join(" ");
   })
 
 }
