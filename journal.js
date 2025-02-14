@@ -38,7 +38,7 @@ async function getCardComments(apiKey, token, cardId) {
       });
 
     }
-    
+
   const cards = t.arg("cards");
   let goalMap = new Map();        
   for (var i = 0; i < cards.length; i++){
@@ -48,12 +48,7 @@ async function getCardComments(apiKey, token, cardId) {
       continue;
     }
 
-    if (cards[i]["labels"] !== undefined) {
-      for (var j = 0; j < cards[i]["labels"].length; j++) {
-
-     
-        
-        let activityEntriesJson = "";
+    let activityEntriesJson = "";
         await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
         const activityEntries = [];
 
@@ -65,26 +60,31 @@ async function getCardComments(apiKey, token, cardId) {
           activityEntries.push(activityEntriesJson[commentIndex]["data"]["text"]);
         }
 
-        const goalName = cards[i]["labels"][j]["name"];
 
-        const goalActivity = {
-          activityName: cards[i]["name"],
-          entries: activityEntries,
-          dateLastActivity: cards[i]["dateLastActivity"]
-        }
+    let goalName = "Journal Entries";
 
-        if (goalMap.has(goalName)) {
-          goalMap.set(goalName, [...goalMap.get(goalName), goalActivity]);
-
-        } else {
-          goalMap.set(goalName, [goalActivity]);
-
-        }
+    if (cards[i]["labels"] !== undefined) {
+      for (var j = 0; j < cards[i]["labels"].length; j++) {
         
+        goalName = cards[i]["labels"][j]["name"];
 
       }
       
-    }          
+    }  
+    
+    const goalActivity = {
+      activityName: cards[i]["name"],
+      entries: activityEntries,
+      dateLastActivity: cards[i]["dateLastActivity"]
+    }
+
+    if (goalMap.has(goalName)) {
+      goalMap.set(goalName, [...goalMap.get(goalName), goalActivity]);
+
+    } else {
+      goalMap.set(goalName, [goalActivity]);
+
+    }
   }
   
   const html = []
