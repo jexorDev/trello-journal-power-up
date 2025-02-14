@@ -33,7 +33,11 @@ async function getCardComments(apiKey, token, cardId) {
   const cards = t.arg("cards");
   let goalMap = new Map();        
   for (var i = 0; i < cards.length; i++){
-    if (!isSameDay(getLocalDateFromUTC(cards[i]["dateLastActivity"]), getCurrentDateTime())) {
+    const utcDate = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
+    console.log(utcDate)
+    console.log(getCurrentDateTime())
+    console.log(isSameDay(utcDate, getCurrentDateTime()))
+    if (!isSameDay(utcDate, getCurrentDateTime())) {
       continue;
     }
 
