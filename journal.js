@@ -13,12 +13,7 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   async function start() {
-
-    const dayjs = require('dayjs')
-
-  dayjs.extend(window.dayjs_plugin_utc);
-  dayjs.extend(window.dayjs_plugin_dayOfYear);
-  
+    document.getElementById("journal").innerHTML = "hwat?";
   var t = window.TrelloPowerUp.iframe({
 appKey: "ab51919adb28cfb83270a0d6ee991d38",
 appName: "activity-journal",
@@ -99,4 +94,6 @@ appAuthor: "doostin"});
 
 }
 
+dayjs.extend(window.dayjs_plugin_utc);
+dayjs.extend(window.dayjs_plugin_dayOfYear);
 start();
