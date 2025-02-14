@@ -89,12 +89,12 @@ async function getCardComments(apiKey, token, cardId) {
   
   const html = []
   goalMap.forEach(function(value, key, map) {
-    console.log(key)
-    console.log(value)
+        
     html.push("<br><span class='goal-name'>" + key + "</span>");
 
-    for (var i = 0; i < value.length; i++) {
-      html.push("<br>" + value[i]["activityName"] + " " + value[i]["dateLastActivity"]);
+    for (var i = 0; i < value.length; i++) {     
+
+      html.push("<br><span class='activity-name'>" + value[i]["activityName"] + "</span>");
       
       for (var j = 0; j < value[i]["entries"].length; j++) {
         html.push("<br>" + value[i]["entries"][j]);
