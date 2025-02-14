@@ -14,7 +14,7 @@ async function getCardComments(apiKey, token, cardId) {
 
   async function start() {
 
-    document.getElementById("journal").innerHTML = "hwat?";
+    const dayjs = require('dayjs')
 
   dayjs.extend(window.dayjs_plugin_utc);
   dayjs.extend(window.dayjs_plugin_dayOfYear);
