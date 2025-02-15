@@ -9,8 +9,7 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function hasHadActivitySinceSelectedDate(first, second) {
-    return true;
-    console.log(new Date(first));
+    console.log(new Date(first).get);
     console.log(new Date(second));
     const result = new Date(first) >= new Date(second);
     console.log(result)
@@ -55,7 +54,7 @@ async function getCardComments(apiKey, token, cardId) {
   for (var i = 0; i < cards.length; i++){
     const cardDateLastActivity = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
   
-    if (!hasHadActivitySinceSelectedDate(cardDateLastActivity, selectedDate)) {
+    if (!hasHadActivitySinceSelectedDate(cardDateLastActivity.toDateString(), selectedDate.toDateString())) {
       continue;
     }
 
@@ -74,7 +73,7 @@ async function getCardComments(apiKey, token, cardId) {
     }
 
     if (activityEntries.length === 0) {
-      //continue;
+      continue;
     }
 
 
