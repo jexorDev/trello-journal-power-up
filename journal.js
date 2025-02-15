@@ -9,10 +9,9 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function hasHadActivitySinceSelectedDate(first, second) {
-    console.log(first);
-    console.log(second);
-    const result = new Date(first) >= new Date(second);
-    console.log(result)
+    
+    return new Date(first).toISOString().substring(0, 10) >= new Date(second).toISOString().substring(0, 10);
+    
   }
 
   function isSameDay(first, second) {
@@ -54,7 +53,7 @@ async function getCardComments(apiKey, token, cardId) {
   for (var i = 0; i < cards.length; i++){
     const cardDateLastActivity = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
   
-    if (!hasHadActivitySinceSelectedDate(cardDateLastActivity.toDateString(), selectedDate.toDateString())) {
+    if (!hasHadActivitySinceSelectedDate(cardDateLastActivity, selectedDate)) {
       continue;
     }
 
