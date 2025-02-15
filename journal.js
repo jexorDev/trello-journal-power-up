@@ -98,11 +98,13 @@ async function getCardComments(apiKey, token, cardId) {
 
     for (var i = 0; i < value.length; i++) {     
 
-      html.push("<br><span class='activity-name'>" + value[i]["activityName"] + "</span>");
+      html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item><span class='w3-large'>" + value[i]["activityName"] + "</span>");
       
       for (var j = 0; j < value[i]["entries"].length; j++) {
-        html.push("<br>" + value[i]["entries"][j]);
+        html.push("<span>" + value[i]["entries"][j] + "</span>");
       }    
+
+      html.push("</div></li></ul>")
 
     }
   })
