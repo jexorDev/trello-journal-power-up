@@ -7,10 +7,13 @@
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
-    <h1>Journal</h1>
-    <input type="date" id="journal-date" />
-    <button onClick="refreshData()">Refresh</button>
-    <div id="journal"></div>  
+    <div class="w3-container">
+      <h1>Journal</h1>
+      <input type="date" id="journal-date" />
+      <button class="w3-btn w3-blue" onClick="refreshData()">Refresh</button>
+      <div id="journal"></div>  
+    </div>
+
     <script>
        var t = window.TrelloPowerUp.iframe({
 appKey: "ab51919adb28cfb83270a0d6ee991d38",

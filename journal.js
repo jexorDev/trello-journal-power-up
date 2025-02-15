@@ -101,7 +101,7 @@ async function getCardComments(apiKey, token, cardId) {
       html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item><span class='w3-large'>" + value[i]["activityName"] + "</span>");
       
       for (var j = 0; j < value[i]["entries"].length; j++) {
-        html.push("<span>" + value[i]["entries"][j] + "</span>");
+        html.push("<br><span>" + value[i]["entries"][j] + "</span>");
       }    
 
       html.push("</div></li></ul>")
