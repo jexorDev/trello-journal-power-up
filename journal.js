@@ -41,7 +41,7 @@ async function getCardComments(apiKey, token, cardId) {
     console.log(selectedDateString);
     const selectedDateArray = selectedDateString.split("-");
     console.log(selectedDateArray);
-    const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1], selectedDateArray[2])
+    const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1] - 1, selectedDateArray[2])
     console.log(selectedDate.toDateString());
 
     let apiToken = "";
