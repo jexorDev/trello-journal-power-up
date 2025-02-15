@@ -9,8 +9,9 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function hasHadActivitySinceSelectedDate(first, second) {
-    
-    return new Date(first).toISOString().substring(0, 10) >= new Date(second).toISOString().substring(0, 10);
+    const firstDate = new Date(first).toISOString().substring(0, 10);
+    const secondDate = new Date(second).toISOString().substring(0, 10);
+    return firstDate >= secondDate;
     
   }
 
