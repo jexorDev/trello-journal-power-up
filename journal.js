@@ -96,11 +96,11 @@ async function getCardComments(apiKey, token, cardId) {
   const html = []
   goalMap.forEach(function(value, key, map) {
         
-    html.push("<br><div class='w3-bar w3-green'><div class='w3-bar-item><h2>" + key + "</h2></div></div>");
+    html.push("<br><div class='w3-bar w3-green'><div class='w3-bar-item'><h2>" + key + "</h2></div></div>");
 
     for (var i = 0; i < value.length; i++) {     
 
-      html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item><span class='w3-large' style='font-weight:bold;'>" + value[i]["activityName"] + "</span>");
+      html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item'><span class='w3-large' style='font-weight:bold;'>" + value[i]["activityName"] + "</span>");
       
       for (var j = 0; j < value[i]["entries"].length; j++) {
         html.push("<br><span>" + value[i]["entries"][j] + "</span>");
