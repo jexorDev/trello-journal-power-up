@@ -30,11 +30,11 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   async function refreshData() {
-    document.getElementById("journal").innerHTML = "";
+
     const selectedDateString = document.getElementById("journal-date").value;
     const selectedDateArray = selectedDateString.split("-");
     const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1], selectedDateArray[2])
-    console.log(selectedDate.toDateString());
+
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
 
@@ -46,13 +46,16 @@ async function getCardComments(apiKey, token, cardId) {
     }
 
   const cards = t.arg("cards");
-  let goalMap = new Map();        
+  let goalMap = new Map();     
+  
   for (var i = 0; i < cards.length; i++){
     const cardDateLastActivity = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
   
     if (!hasHadActivitySinceSelectedDate(cardDateLastActivity, selectedDate)) {
       continue;
     }
+
+    console.log(cards[i]);
 
     let activityEntriesJson = "";
     await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
@@ -62,12 +65,12 @@ async function getCardComments(apiKey, token, cardId) {
       if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), selectedDate)) {
         continue;
       }
-
+      console.log(activityEntriesJson[commentIndex]["data"]["text"]);
       activityEntries.push(activityEntriesJson[commentIndex]["data"]["text"]);
     }
 
     if (activityEntries.length === 0) {
-      //continue;
+      continue;
     }
 
 
