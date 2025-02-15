@@ -94,7 +94,7 @@ async function getCardComments(apiKey, token, cardId) {
   const html = []
   goalMap.forEach(function(value, key, map) {
         
-    html.push("<br><span class='goal-name'>" + key + "</span>");
+    html.push("<br><div class='w3-bar w3-green'>" + key + "</div>");
 
     for (var i = 0; i < value.length; i++) {     
 
