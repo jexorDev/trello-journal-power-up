@@ -8,6 +8,10 @@ async function getCardComments(apiKey, token, cardId) {
     }
   }
 
+  function hasHadActivitySinceSelectedDate(first, second) {
+    return new Date(first) >= new Date(second);
+  }
+
   function isSameDay(first, second) {
     const firstDate = new Date(first)
     const secondDate = new Date(second)
@@ -25,9 +29,9 @@ async function getCardComments(apiKey, token, cardId) {
     return new Date(new Date(Date.parse(utcDate)).toLocaleDateString());
   }
 
-  async function start() {
- 
- 
+  async function refreshData() {
+    document.getElementById("journal").innerHTML = "";
+    const selectedDate = document.getElementById("journal-date").value;
 
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
@@ -42,9 +46,9 @@ async function getCardComments(apiKey, token, cardId) {
   const cards = t.arg("cards");
   let goalMap = new Map();        
   for (var i = 0; i < cards.length; i++){
-    const utcDate = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
+    const cardDateLastActivity = getLocalDateFromUTC(cards[i]["dateLastActivity"]);
   
-    if (!isSameDay(utcDate, getCurrentDateTime())) {
+    if (!hasHadActivitySinceSelectedDate(cardDateLastActivity, selectedDate)) {
       continue;
     }
 
@@ -53,7 +57,7 @@ async function getCardComments(apiKey, token, cardId) {
         const activityEntries = [];
 
         for (var commentIndex = 0; commentIndex < activityEntriesJson.length; commentIndex++) {
-          if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), getCurrentDateTime())) {
+          if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), selectedDate)) {
             continue;
           }
 
@@ -106,4 +110,9 @@ async function getCardComments(apiKey, token, cardId) {
   document.getElementById("journal").innerHTML = html.join(" ");
 }
 
-start();
+function onLoad() {
+  document.getElementById("journal-date").value = getCurrentDateTime().toISOString().substring(0, 10);
+  refreshData()
+}
+
+onLoad();
