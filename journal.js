@@ -53,16 +53,20 @@ async function getCardComments(apiKey, token, cardId) {
     }
 
     let activityEntriesJson = "";
-        await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
-        const activityEntries = [];
+    await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
+    const activityEntries = [];
 
-        for (var commentIndex = 0; commentIndex < activityEntriesJson.length; commentIndex++) {
-          if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), selectedDate)) {
-            continue;
-          }
+    for (var commentIndex = 0; commentIndex < activityEntriesJson.length; commentIndex++) {
+      if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), selectedDate)) {
+        continue;
+      }
 
-          activityEntries.push(activityEntriesJson[commentIndex]["data"]["text"]);
-        }
+      activityEntries.push(activityEntriesJson[commentIndex]["data"]["text"]);
+    }
+
+    if (activityEntries.length === 0) {
+      continue;
+    }
 
 
     let goalName = "Journal Entries";
@@ -84,21 +88,19 @@ async function getCardComments(apiKey, token, cardId) {
 
     if (goalMap.has(goalName)) {
       goalMap.set(goalName, [...goalMap.get(goalName), goalActivity]);
-
     } else {
       goalMap.set(goalName, [goalActivity]);
-
     }
   }
   
   const html = []
   goalMap.forEach(function(value, key, map) {
         
-    html.push("<br><div class='w3-bar w3-green'>" + key + "</div>");
+    html.push("<br><div class='w3-bar w3-green'><div class='w3-bar-item><h2>" + key + "</h2></div></div>");
 
     for (var i = 0; i < value.length; i++) {     
 
-      html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item><span class='w3-large'>" + value[i]["activityName"] + "</span>");
+      html.push("<ul class='w3-ul w3-card-4'><li class='w3-bar'><div class='w3-bar-item><span class='w3-large' style='font-weight:bold;'>" + value[i]["activityName"] + "</span>");
       
       for (var j = 0; j < value[i]["entries"].length; j++) {
         html.push("<br><span>" + value[i]["entries"][j] + "</span>");
