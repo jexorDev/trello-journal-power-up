@@ -74,7 +74,7 @@ async function getCardComments(apiKey, token, cardId) {
     }
 
     if (activityEntries.length === 0) {
-      continue;
+      //continue;
     }
 
 
