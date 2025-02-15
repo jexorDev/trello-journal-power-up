@@ -38,8 +38,11 @@ async function getCardComments(apiKey, token, cardId) {
   async function refreshData() {
 
     const selectedDateString = document.getElementById("journal-date").value;
+    console.log(selectedDateString);
     const selectedDateArray = selectedDateString.split("-");
+    console.log(selectedDateArray);
     const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1], selectedDateArray[2])
+    console.log(selectedDate.toDateString());
 
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
