@@ -16,7 +16,7 @@ async function getCardComments(apiKey, token, cardId) {
     const firstDate = new Date(first)
     const secondDate = new Date(second)
 
-    console.log(firstDate.toDateString())
+    console.log(second)
     console.log(secondDate.toDateString())
 
     var result = firstDate.getFullYear() === secondDate.getFullYear() &&
