@@ -16,14 +16,9 @@ async function getCardComments(apiKey, token, cardId) {
     const firstDate = new Date(first)
     const secondDate = new Date(second)
 
-    console.log(second)
-    console.log(secondDate.toDateString())
-
-    var result = firstDate.getFullYear() === secondDate.getFullYear() &&
+    return firstDate.getFullYear() === secondDate.getFullYear() &&
       firstDate.getMonth() === secondDate.getMonth() &&
       firstDate.getDate() === secondDate.getDate();
-    console.log(result);
-    return result;
   }
 
   function getCurrentDateTime() {
@@ -36,7 +31,10 @@ async function getCardComments(apiKey, token, cardId) {
 
   async function refreshData() {
     document.getElementById("journal").innerHTML = "";
-    const selectedDate = document.getElementById("journal-date").value;
+    
+    const selectedDateString = document.getElementById("journal-date").value;
+    const selectedDateArray = selectedDateString.split("-");
+    const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1], selectedDateArray[2])
 
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
