@@ -9,6 +9,8 @@ async function getCardComments(apiKey, token, cardId) {
   }
 
   function hasHadActivitySinceSelectedDate(first, second) {
+    console.log(first)
+    console.log(second)
     return new Date(first) >= new Date(second);
   }
 
@@ -39,7 +41,7 @@ async function getCardComments(apiKey, token, cardId) {
     const selectedDateString = document.getElementById("journal-date").value;
     const selectedDateArray = selectedDateString.split("-");
     const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1], selectedDateArray[2])
-
+    console.log(selectedDate.toDateString());
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
 
