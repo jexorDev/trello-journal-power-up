@@ -128,7 +128,7 @@ async function getCompletedCardChecklistItems(apiKey, token, cardId) {
   const html = []
   goalMap.forEach(function(value, key, map) {
         
-    html.push("<br><div class='w3-bar w3-green'><div class='w3-bar-item'><h2>" + key + "</h2></div></div>");
+    html.push("<br><div class='w3-bar w3-blue'><div class='w3-bar-item'><h2>" + key + "</h2></div></div>");
 
     for (var i = 0; i < value.length; i++) {     
 
@@ -140,7 +140,7 @@ async function getCompletedCardChecklistItems(apiKey, token, cardId) {
 
       for (var k = 0; k < value[i]["completedChecklistItems"].length; k++) {
         const completedChecklistItem = value[i]["completedChecklistItems"][k];
-        html.push("<br>span class='w3-badge w3-green'>Completed</span>" + completedChecklistItem["checklistItemName"] + " on " + completedChecklistItem["checklistName"] + " checklist");
+        html.push("<br><span class='w3-tag w3-green'>Completed</span><span style='font-weight:bold;'>" + completedChecklistItem["checklistItemName"] + "</span> on <span style='font-weight:bold;'>" + completedChecklistItem["checklistName"] + "</span> checklist");
       }
 
       html.push("</div></li></ul>")
