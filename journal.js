@@ -138,7 +138,7 @@ async function getCompletedCardChecklistItems(apiKey, token, cardId) {
         html.push("<br><span>" + value[i]["entries"][j] + "</span>");
       }    
 
-      for (var k = 0; k < value[i]["completedChecklistItems"][k]; k++) {
+      for (var k = 0; k < value[i]["completedChecklistItems"].length; k++) {
         const completedChecklistItem = value[i]["completedChecklistItems"][k];
         html.push("<br><span>Completed " + completedChecklistItem["checklistItemName"] + " on " + completedChecklistItem["checklistName"] + "</span>");
       }
