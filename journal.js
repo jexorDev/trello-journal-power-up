@@ -69,7 +69,7 @@ async function getCompletedCardChecklistItems(apiKey, token, cardId) {
     let checklistUpdatesJson = "";
     await Promise.all([
       getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data),
-      getCompletedCardChecklistItems(apiKey, apiToken, cards[i]["id"]).then((data => checklistUpdatesJson = data))]);
+      getCompletedCardChecklistItems(appKey, apiToken, cards[i]["id"]).then((data => checklistUpdatesJson = data))]);
     
     const activityEntries = [];
 
