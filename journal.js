@@ -4,18 +4,22 @@ async function getCardComments(apiKey, token, cardId) {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("error fetching card comments", error);
     }
   }
 
+async function getCompletedCardChecklistItems(apiKey, token, cardId) {
+  try {
+    const response = await fetch(`https://api.trello.com/1/cards/${cardId}/actions?filter=updateCheckItemStateOnCard&key=${apiKey}&token=${token}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("error fetching competed card checklist items", error)
+  }
+}
+
   function hasHadActivitySinceSelectedDate(first, second) {
-    const firstDate = new Date(first).toISOString().substring(0, 10);
-    const secondDate = new Date(second).toISOString().substring(0, 10);
-    console.log(firstDate);
-    console.log(secondDate)
-    console.log(firstDate >= secondDate);
-    return firstDate >= secondDate;
-    
+    return new Date(first) >= new Date(second);
   }
 
   function isSameDay(first, second) {
@@ -38,11 +42,8 @@ async function getCardComments(apiKey, token, cardId) {
   async function refreshData() {
 
     const selectedDateString = document.getElementById("journal-date").value;
-    console.log(selectedDateString);
     const selectedDateArray = selectedDateString.split("-");
-    console.log(selectedDateArray);
     const selectedDate = new Date(selectedDateArray[0], selectedDateArray[1] - 1, selectedDateArray[2])
-    console.log(selectedDate.toDateString());
 
     let apiToken = "";
     const appKey = "ab51919adb28cfb83270a0d6ee991d38";
@@ -64,21 +65,40 @@ async function getCardComments(apiKey, token, cardId) {
       continue;
     }
 
-    console.log(cards[i]);
-
     let activityEntriesJson = "";
-    await getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data);
+    let checklistUpdatesJson = "";
+    await Promise.all([
+      getCardComments(appKey, apiToken, cards[i]["id"]).then((data) => activityEntriesJson = data),
+      getCompletedCardChecklistItems(apiKey, apiToken, cards[i]["id"]).then((data => checklistUpdatesJson = data))]);
+    
     const activityEntries = [];
 
     for (var commentIndex = 0; commentIndex < activityEntriesJson.length; commentIndex++) {
       if (!isSameDay(getLocalDateFromUTC(activityEntriesJson[commentIndex]["date"]), selectedDate)) {
         continue;
       }
-      console.log(activityEntriesJson[commentIndex]["data"]["text"]);
       activityEntries.push(activityEntriesJson[commentIndex]["data"]["text"]);
     }
 
-    if (activityEntries.length === 0) {
+    const completedChecklistItems = [];
+
+    for (var checklistIndex = 0; checklistIndex < checklistUpdatesJson.length; checklistIndex++) {
+      if (!isSameDay(getLocalDateFromUTC(checklistUpdatesJson[checklistIndex]["date"]), selectedDate)) {
+        continue
+      }
+      
+      const checklistItem = checklistUpdatesJson[checklistIndex]["data"]["checkItem"];
+      
+      if (checklistItem["state"] === "complete") {
+        completedChecklistItems.push({
+          checklistName: checklistUpdatesJson[checklistIndex]["data"]["checklist"]["name"],
+          checklistItemName: checklistItem["name"]
+        })
+      }
+    }
+
+    if (activityEntries.length === 0 &&
+        completedChecklistItems.length === 0) {
       continue;
     }
 
@@ -87,16 +107,14 @@ async function getCardComments(apiKey, token, cardId) {
 
     if (cards[i]["labels"] !== undefined) {
       for (var j = 0; j < cards[i]["labels"].length; j++) {
-        
         goalName = cards[i]["labels"][j]["name"];
-
       }
-      
     }  
     
     const goalActivity = {
       activityName: cards[i]["name"],
       entries: activityEntries,
+      completedChecklistItems: completedChecklistItems,
       dateLastActivity: cards[i]["dateLastActivity"]
     }
 
@@ -119,6 +137,11 @@ async function getCardComments(apiKey, token, cardId) {
       for (var j = 0; j < value[i]["entries"].length; j++) {
         html.push("<br><span>" + value[i]["entries"][j] + "</span>");
       }    
+
+      for (var k = 0; k < value[i]["completedChecklistItems"][k]; k++) {
+        const completedChecklistItem = value[i]["completedChecklistItems"][k];
+        html.push("<br><span>Completed " + completedChecklistItem["checklistItemName"] + " on " + completedChecklistItem["checklistName"] + "</span>");
+      }
 
       html.push("</div></li></ul>")
 
